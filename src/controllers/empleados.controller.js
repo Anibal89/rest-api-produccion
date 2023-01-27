@@ -47,10 +47,10 @@ const getEmpleado = async(req,res)=> {
 
 //Eliminar Empleado
 export const deleteEmpelado = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const [rows] = await pool.query("DELETE FROM empleado WHERE Id_Empleado = ?", [id]);
-    res.json([{message: "Empleado Eliminado"}, rows]);
+    res.json({message: "Empleado Eliminado"});
 
     if (rows.affectedRows <= 0) {
       return res.status(404).json({ message: "Empleado no encontrado" });
