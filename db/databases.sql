@@ -2,7 +2,7 @@
  Show databases;
  use companydb;
 
-# Creacion de Tablas
+# Creacion de Tablas a a
 
 CREATE TABLE empleado(
 	Id_Empleado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
