@@ -47,19 +47,37 @@ const getEmpleado = async(req,res)=> {
 
 //Eliminar Empleado
 export const deleteEmpelado = async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const [rows] = await pool.query("DELETE FROM empleado WHERE Id_Empleado = ?", [id]);
-    res.json({message: "Empleado Eliminado"});
+    res.json([{message: "Empleado Eliminado"},{rows}]);
 
-    if (rows.affectedRows <= 0) {
-      return res.status(404).json({ message: "Empleado no encontrado" });
-    }
-    res.sendStatus(204);
+    // if (rows.affectedRows <= 0) {
+    //   return res.status(404).json({ message: "Empleado no encontrado" });
+    // }
+    // res.sendStatus(204);
   } catch (error) {
-    return res.status(500).json({ message: "algo anda mal" });
+     res.status(500)
+     res.status(error.message);
   }
 };
+
+/*
+const deleteRol = async(req, res) => {
+
+    try {
+        const{ Id_Rol } = req.params;
+        const connection = await getConnection();
+        const result = await connection.query("DELETE FROM Rol WHERE Id_Rol = ?", Id_Rol);
+        res.json([{message: "Eliminado"},result]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+};
+*/
+
+
 
 //Actualizar Empleado en un campo determinado
 
